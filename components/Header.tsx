@@ -1,7 +1,9 @@
+import { useAuth } from "@/context/AuthContext";
 import { LuBookOpen, LuLibrary, LuSparkle, LuUser } from "react-icons/lu";
 import LogoutButton from "./LogoutButton";
 
 const Header = () => {
+  const { logout } = useAuth();
   return (
     <header className="bg-white/80  backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50 mb-8 shadow-lg">
       <div className="container mx-auto px-4 py-4 max-w-7xl">
@@ -50,7 +52,7 @@ const Header = () => {
               <LuUser className="w-4 h-4 text-gray-600" />
               <span className="text-sm font-medium text-gray-700">Reader</span>
             </div>
-            <LogoutButton />
+            <LogoutButton onClick={logout} />
           </div>
         </div>
       </div>
