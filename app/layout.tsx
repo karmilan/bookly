@@ -1,3 +1,4 @@
+import { AuthProvider } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -15,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* <Navbar /> */}
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
