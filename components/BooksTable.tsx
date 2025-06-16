@@ -1,43 +1,48 @@
-"use client";
+// "use client";
 
+import { Book } from "@/types/data";
 import { LuSquarePen } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 type BooksTableProps = {
   filterValue?: string;
   searchQuery?: string;
+  books?: Book[];
 };
 
 const BooksTable: React.FC<BooksTableProps> = ({
   filterValue,
   searchQuery,
+  books,
 }) => {
+  const token = localStorage.getItem("token");
+
   // Sample book data
-  const books = [
-    {
-      id: 1,
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      description:
-        "A story of wealth, love, and the American Dream in the 1920s.",
-      status: "read",
-    },
-    {
-      id: 2,
-      title: "1984",
-      author: "George Orwell",
-      description: "A dystopian novel about totalitarianism and surveillance.",
-      status: "unread",
-    },
-    {
-      id: 3,
-      title: "Pride and Prejudice",
-      author: "Jane Austen",
-      description:
-        "A romantic novel exploring social class and family pressures.",
-      status: "read",
-    },
-  ];
+  // const books = [
+  //   {
+  //     id: 1,
+  //     title: "The Great Gatsby",
+  //     author: "F. Scott Fitzgerald",
+  //     description:
+  //       "A story of wealth, love, and the American Dream in the 1920s.",
+  //     status: "read",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "1984",
+  //     author: "George Orwell",
+  //     description: "A dystopian novel about totalitarianism and surveillance.",
+  //     status: "unread",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Pride and Prejudice",
+  //     author: "Jane Austen",
+  //     description:
+  //       "A romantic novel exploring social class and family pressures.",
+  //     status: "read",
+  //   },
+  // ];
 
   const handleEdit = (id: number) => {
     alert(`Edit book with ID: ${id}`);
@@ -83,9 +88,9 @@ const BooksTable: React.FC<BooksTableProps> = ({
                   .includes(searchQuery?.toLowerCase() || "") &&
                 (filterValue === "All Books" ||
                   book.status === filterValue) && (
-                  <tr key={book.id} className="border-b hover:bg-gray-50">
+                  <tr key={book.bookid} className="border-b hover:bg-gray-50">
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {book.id}
+                      {book.bookid}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
                       {book.title}

@@ -1,9 +1,13 @@
 import { useAuth } from "@/context/AuthContext";
+import { Book } from "@/types/data";
+import { getUserFromToken } from "@/utils/getUserFromToken";
 import { LuBookOpen, LuLibrary, LuSparkle, LuUser } from "react-icons/lu";
 import LogoutButton from "./LogoutButton";
 
-const Header = () => {
+const Header = ({ books }: { books: Book[] }) => {
   const { logout } = useAuth();
+  const email = getUserFromToken()?.sub;
+
   return (
     <header className="bg-white/80  backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50 mb-8 shadow-lg">
       <div className="container mx-auto px-4 py-4 max-w-7xl">
@@ -28,20 +32,25 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-6">
             <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 rounded-lg">
               <LuBookOpen className="w-4 h-4 text-blue-600" />
-              <span className="text-sm font-medium text-blue-700">5 Books</span>
+              <span className="text-sm font-medium text-blue-700">
+                {books.length} Books
+              </span>
             </div>
             <div className="flex items-center gap-2 px-3 py-2 bg-green-50 rounded-lg">
               <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
               </div>
-              <span className="text-sm font-medium text-green-700">3 Read</span>
+              <span className="text-sm font-medium text-green-700">
+                {books.filter((book) => book.status === "read").length} Read
+              </span>
             </div>
             <div className="flex items-center gap-2 px-3 py-2 bg-orange-50 rounded-lg">
               <div className="w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
               </div>
               <span className="text-sm font-medium text-orange-700">
-                2 Pending
+                {books.filter((book) => book.status === "unread").length}{" "}
+                Pending
               </span>
             </div>
           </div>
@@ -50,7 +59,7 @@ const Header = () => {
           <div className="flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg">
               <LuUser className="w-4 h-4 text-gray-600" />
-              <span className="text-sm font-medium text-gray-700">Reader</span>
+              <span className="text-sm font-medium text-gray-700">{email}</span>
             </div>
             <LogoutButton onClick={logout} />
           </div>
