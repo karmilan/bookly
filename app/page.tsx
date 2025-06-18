@@ -32,11 +32,15 @@ export default function Home() {
     async function loadBooks() {
       try {
         const userId = getUserFromToken();
-        setUserId(userId?.userid);
+        setUserId(userId?.userid ?? null);
         const booksData = await getBooksByUser(userId?.userid || 0);
         setBooks(booksData);
       } catch (err: unknown) {
-        setError(err.message);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
       }
@@ -56,7 +60,11 @@ export default function Home() {
       await deleteBook(id);
       router.refresh();
     } catch (err: unknown) {
-      setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   };
 

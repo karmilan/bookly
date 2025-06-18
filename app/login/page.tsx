@@ -19,7 +19,11 @@ export default function LoginPage() {
       const token = await loginUser(email, password);
       login(token);
     } catch (err: unknown) {
-      setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     } finally {
       setLoading(false);
     }

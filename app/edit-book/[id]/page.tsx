@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Page = () => {
   const params = useParams();
-  const id = params.id;
+  const id = parseInt(params.id as string);
 
   const router = useRouter();
 
@@ -24,8 +24,8 @@ const Page = () => {
     setSuccess(false);
 
     try {
-      const bookId = parseInt(id);
-      await updateBook(bookId, {
+      // const bookId = parseInt(id);
+      await updateBook(id, {
         title,
         author,
         description,
@@ -35,7 +35,11 @@ const Page = () => {
       router.push("/");
       //   if (onSuccess) onSuccess();
     } catch (err: unknown) {
-      setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   };
 

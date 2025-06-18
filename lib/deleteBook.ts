@@ -1,4 +1,4 @@
-export async function deleteBook(id: string) {
+export async function deleteBook(id: number) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/books/${id}`,
     {
