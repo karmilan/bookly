@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import AddForm from "@/components/AddForm";
 import { addBook } from "@/lib/addBook";
