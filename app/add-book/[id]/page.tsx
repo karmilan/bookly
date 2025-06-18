@@ -1,18 +1,16 @@
-// "use client";
+"use client";
 
 import AddForm from "@/components/AddForm";
 import { addBook } from "@/lib/addBook";
 import { Book } from "@/types/data";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
-type PageProps = {
-  params: { id: string };
-};
-
-const Page = ({ params }: PageProps) => {
-  const { id } = params;
-  console.log("User ID:", typeof id, id); // Ensure id is a string
+const Page = () => {
+  // const { id } = params;
+  const params1 = useParams();
+  const userId = params1.id;
+  console.log("User ID:", typeof userId, userId);
   const router = useRouter();
 
   const [title, setTitle] = useState<string>("");
