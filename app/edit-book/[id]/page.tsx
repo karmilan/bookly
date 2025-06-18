@@ -2,11 +2,13 @@
 import EditForm from "@/components/EditForm";
 import { updateBook } from "@/lib/updateBook";
 import { Book } from "@/types/data";
-import { useRouter } from "next/navigation";
-import { use, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
 
-const Page = ({ params }: { params: { id: number } }) => {
-  const { id } = use(params);
+const Page = () => {
+  const params = useParams();
+  const id = params.id;
+
   const router = useRouter();
 
   const [title, setTitle] = useState<string>("");

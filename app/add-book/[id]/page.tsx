@@ -8,9 +8,9 @@ import { useState } from "react";
 
 const Page = () => {
   // const { id } = params;
-  const params1 = useParams();
-  const userId = params1.id;
-  console.log("User ID:", typeof userId, userId);
+  const params = useParams();
+  const id = params.id;
+
   const router = useRouter();
 
   const [title, setTitle] = useState<string>("");
