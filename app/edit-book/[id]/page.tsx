@@ -32,7 +32,7 @@ const Page = ({ params }: { params: { id: number } }) => {
       setSuccess(true);
       router.push("/");
       //   if (onSuccess) onSuccess();
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err.message);
     }
   };

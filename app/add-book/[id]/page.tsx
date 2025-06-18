@@ -34,7 +34,7 @@ const Page = ({ params }: { params: { id: number } }) => {
       setAuthor("");
       setDescription("");
       router.push("/");
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err.message);
     }
   };

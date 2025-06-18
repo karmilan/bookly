@@ -18,7 +18,7 @@ export default function LoginPage() {
     try {
       const token = await loginUser(email, password);
       login(token);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err.message);
     } finally {
       setLoading(false);

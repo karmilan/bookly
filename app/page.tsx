@@ -60,6 +60,9 @@ export default function Home() {
     }
   };
 
+  if (loading) return <div>Loading books...</div>;
+  if (error) return <div className="text-red-600">Error: {error}</div>;
+
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 ">
