@@ -9,8 +9,8 @@ import { useState } from "react";
 const Page = () => {
   // const { id } = params;
   const params = useParams();
-  const id = params.id;
-
+  const id = parseInt(params.id as string);
+  console.log("ID from params:", typeof id, id);
   const router = useRouter();
 
   const [title, setTitle] = useState<string>("");
@@ -30,7 +30,7 @@ const Page = () => {
         author,
         description,
         status: "unread",
-        user_id: parseInt(id),
+        user_id: id,
       } as Book);
       setSuccess(true);
       setTitle("");
