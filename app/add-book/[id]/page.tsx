@@ -4,15 +4,15 @@ import AddForm from "@/components/AddForm";
 import { addBook } from "@/lib/addBook";
 import { Book } from "@/types/data";
 import { useRouter } from "next/navigation";
-import { use, useState } from "react";
+import { useState } from "react";
 
 type PageProps = {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 };
 
 const Page = ({ params }: PageProps) => {
-  const { id } = use(params);
-  console.log("User ID:", id);
+  const { id } = params;
+  console.log("User ID:", typeof id, id); // Ensure id is a string
   const router = useRouter();
 
   const [title, setTitle] = useState<string>("");
