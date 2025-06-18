@@ -18,7 +18,6 @@ const BooksTable: React.FC<BooksTableProps> = ({
   books,
   handleDelete,
 }) => {
-  const token = localStorage.getItem("token");
   const router = useRouter();
 
   // Sample book data
