@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import SearchFilterBar from "@/components/SearchFilterBar";
 import Button from "@/components/ui/Button";
+import { deleteBook } from "@/lib/deleteBook";
 import { getBooksByUser } from "@/lib/getBooksByUser";
 import { Book } from "@/types/data";
 import { getUserFromToken } from "@/utils/getUserFromToken";
@@ -44,6 +45,21 @@ export default function Home() {
     loadBooks();
   }, []);
 
+  // delete book function
+  const handleDelete = async (id: number) => {
+    const confirm = window.confirm(
+      "Are you sure you want to delete this book?"
+    );
+    if (!confirm) return;
+
+    try {
+      await deleteBook(id);
+      router.refresh();
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 ">
@@ -69,6 +85,7 @@ export default function Home() {
             filterValue={filterValue}
             searchQuery={searchQuery}
             books={books}
+            handleDelete={handleDelete}
           />
         </div>
       </div>

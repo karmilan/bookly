@@ -1,6 +1,7 @@
 // "use client";
 
 import { Book } from "@/types/data";
+import { useRouter } from "next/navigation";
 import { LuSquarePen } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
@@ -8,14 +9,17 @@ type BooksTableProps = {
   filterValue?: string;
   searchQuery?: string;
   books?: Book[];
+  handleDelete: (id: number) => void;
 };
 
 const BooksTable: React.FC<BooksTableProps> = ({
   filterValue,
   searchQuery,
   books,
+  handleDelete,
 }) => {
   const token = localStorage.getItem("token");
+  const router = useRouter();
 
   // Sample book data
   // const books = [
@@ -44,15 +48,15 @@ const BooksTable: React.FC<BooksTableProps> = ({
   //   },
   // ];
 
-  const handleEdit = (id: number) => {
-    alert(`Edit book with ID: ${id}`);
-    // Implement edit logic here
+  const handleEdit = (book: Book) => {
+    console.log("Edit book:", book);
+    router.push(`/edit-book/${book.bookid}`);
   };
 
-  const handleDelete = (id: number) => {
-    alert(`Delete book with ID: ${id}`);
-    // Implement delete logic here
-  };
+  // const handleDelete = (id: number) => {
+  //   alert(`Delete book with ID: ${id}`);
+  //   // Implement delete logic here
+  // };
 
   return (
     <div className="container">
@@ -114,14 +118,14 @@ const BooksTable: React.FC<BooksTableProps> = ({
                     </td>
                     <td className="px-6 py-4 text-sm">
                       <button
-                        onClick={() => handleEdit(book.id)}
+                        onClick={() => handleEdit(book)}
                         className="mr-2 px-4 py-2 cursor-pointer"
                       >
                         {/* Edit */}
                         <LuSquarePen className="w-4 h-4" />
                       </button>
                       <button
-                        onClick={() => handleDelete(book.id)}
+                        onClick={() => handleDelete(book.bookid)}
                         className="px-4 py-2 cursor-pointer"
                       >
                         {/* Delete */}

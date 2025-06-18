@@ -3,10 +3,12 @@
 import AddForm from "@/components/AddForm";
 import { addBook } from "@/lib/addBook";
 import { Book } from "@/types/data";
+import { useRouter } from "next/navigation";
 import { use, useState } from "react";
 
 const Page = ({ params }: { params: { id: number } }) => {
   const { id } = use(params);
+  const router = useRouter();
 
   const [title, setTitle] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
@@ -31,6 +33,7 @@ const Page = ({ params }: { params: { id: number } }) => {
       setTitle("");
       setAuthor("");
       setDescription("");
+      router.push("/");
     } catch (err: any) {
       setError(err.message);
     }
