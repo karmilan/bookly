@@ -84,7 +84,7 @@ const BooksTable: React.FC<BooksTableProps> = ({
             </tr>
           </thead>
           <tbody>
-            {books.map(
+            {(books ?? []).map(
               (book) =>
                 book.title
                   .toLowerCase()
