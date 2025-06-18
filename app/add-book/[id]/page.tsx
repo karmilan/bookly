@@ -38,7 +38,11 @@ const Page = () => {
       setDescription("");
       router.push("/");
     } catch (err: unknown) {
-      setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   };
 
