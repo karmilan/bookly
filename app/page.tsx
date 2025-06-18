@@ -75,7 +75,7 @@ export default function Home() {
             <Button
               icon={<LuPlus className="w-4 h-4 mr-2" />}
               label="Add New Book"
-              onclick={() => router.push(`/add-book/${userId?.toString()}`)}
+              onclick={() => router.push(`/add-book/${userId}`)}
             />
             <SearchFilterBar
               value={searchQuery}
