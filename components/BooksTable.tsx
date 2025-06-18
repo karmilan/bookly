@@ -124,7 +124,9 @@ const BooksTable: React.FC<BooksTableProps> = ({
                         <LuSquarePen className="w-4 h-4" />
                       </button>
                       <button
-                        onClick={() => handleDelete(book.bookid)}
+                        onClick={() =>
+                          book.bookid !== undefined && handleDelete(book.bookid)
+                        }
                         className="px-4 py-2 cursor-pointer"
                       >
                         {/* Delete */}
