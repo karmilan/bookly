@@ -35,7 +35,7 @@ export default function Home() {
         setUserId(userId?.userid);
         const booksData = await getBooksByUser(userId?.userid || 0);
         setBooks(booksData);
-      } catch (err: any) {
+      } catch (err: unknown) {
         setError(err.message);
       } finally {
         setLoading(false);
@@ -55,7 +55,7 @@ export default function Home() {
     try {
       await deleteBook(id);
       router.refresh();
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err.message);
     }
   };
