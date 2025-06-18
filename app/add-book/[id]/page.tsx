@@ -6,8 +6,13 @@ import { Book } from "@/types/data";
 import { useRouter } from "next/navigation";
 import { use, useState } from "react";
 
-const Page = ({ params }: { params: { id: number } }) => {
+type PageProps = {
+  params: Promise<{ id: string }>;
+};
+
+const Page = ({ params }: PageProps) => {
   const { id } = use(params);
+  console.log("User ID:", id);
   const router = useRouter();
 
   const [title, setTitle] = useState<string>("");
