@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import SearchFilterBar from "@/components/SearchFilterBar";
 import Button from "@/components/ui/Button";
+import { useAuth } from "@/context/AuthContext";
 import { deleteBook } from "@/lib/deleteBook";
 import { getBooksByUser } from "@/lib/getBooksByUser";
 import { Book } from "@/types/data";
@@ -14,6 +15,7 @@ import { LuPlus } from "react-icons/lu";
 
 export default function Home() {
   const router = useRouter();
+  const { isAuthenticated } = useAuth();
 
   const [userId, setUserId] = useState<number | null>(null);
 
@@ -29,11 +31,19 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/login");
+      return;
+    } else {
+      loadBooks();
+    }
+
     async function loadBooks() {
       try {
         const userId = getUserFromToken();
         setUserId(userId?.userid ?? null);
         const booksData = await getBooksByUser(userId?.userid || 0);
+
         setBooks(booksData);
       } catch (err: unknown) {
         if (err instanceof Error) {
@@ -45,8 +55,6 @@ export default function Home() {
         setLoading(false);
       }
     }
-
-    loadBooks();
   }, []);
 
   // delete book function
@@ -69,7 +77,7 @@ export default function Home() {
   };
 
   if (loading) return <div>Loading books...</div>;
-  if (error) return <div className="text-red-600">Error: {error}</div>;
+  // if (error) return <div className="text-red-600">Error: {error}</div>;
 
   return (
     <ProtectedRoute>
@@ -97,6 +105,7 @@ export default function Home() {
             searchQuery={searchQuery}
             books={books}
             handleDelete={handleDelete}
+            error={error ?? undefined}
           />
         </div>
       </div>

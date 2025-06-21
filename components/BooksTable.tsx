@@ -10,12 +10,14 @@ type BooksTableProps = {
   searchQuery?: string;
   books?: Book[];
   handleDelete: (id: number) => void;
+  error?: string;
 };
 
 const BooksTable: React.FC<BooksTableProps> = ({
   filterValue,
   searchQuery,
   books,
+  error,
   handleDelete,
 }) => {
   const router = useRouter();
@@ -52,11 +54,6 @@ const BooksTable: React.FC<BooksTableProps> = ({
     router.push(`/edit-book/${book.bookid}`);
   };
 
-  // const handleDelete = (id: number) => {
-  //   alert(`Delete book with ID: ${id}`);
-  //   // Implement delete logic here
-  // };
-
   return (
     <div className="container">
       <div className="overflow-x-auto drop-shadow-xl rounded-lg">
@@ -83,6 +80,15 @@ const BooksTable: React.FC<BooksTableProps> = ({
               </th>
             </tr>
           </thead>
+          {error && (
+            <tbody>
+              <tr>
+                <td className="text-center py-10 text-gray-500 text-lg">
+                  There is currently no data to display.
+                </td>
+              </tr>
+            </tbody>
+          )}
           <tbody>
             {(books ?? []).map(
               (book) =>
