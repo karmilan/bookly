@@ -10,5 +10,5 @@ export async function loginUser(email: string, password: string) {
 
   if (!res.ok) throw new Error("Invalid credentials");
   const data = await res.json();
-  return data.access_token; // adjust if your API returns differently
+  return data.access_token;
 }

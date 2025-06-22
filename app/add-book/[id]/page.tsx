@@ -7,7 +7,6 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Page = () => {
-  // const { id } = params;
   const params = useParams();
   const id = parseInt(params.id as string);
   console.log("ID from params:", typeof id, id);

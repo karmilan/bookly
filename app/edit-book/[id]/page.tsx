@@ -24,7 +24,6 @@ const Page = () => {
     setSuccess(false);
 
     try {
-      // const bookId = parseInt(id);
       await updateBook(id, {
         title,
         author,
@@ -33,7 +32,6 @@ const Page = () => {
       } as Book);
       setSuccess(true);
       router.push("/");
-      //   if (onSuccess) onSuccess();
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -50,54 +48,6 @@ const Page = () => {
           Update the Book with ID: {id}
         </h2>
 
-        {/* <form onSubmit={handleSubmit} className="max-w-md space-y-4">
-          <div>
-            <label className="block text-sm font-medium">Title</label>
-            <input
-              className="w-full p-2 border rounded"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium">Author</label>
-            <input
-              className="w-full p-2 border rounded"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium">Description</label>
-            <input
-              className="w-full p-2 border rounded"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium">Status</label>
-            <select
-              className="w-full p-2 border rounded"
-              value={status}
-              onChange={(e) => setStatus(e.target.value as "read" | "unread")}
-              required
-            >
-              <option value="read">Read</option>
-              <option value="unread">Unread</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="px-4 py-2 bg-yellow-600 text-white rounded"
-          >
-            Update Book
-          </button>
-
-          {success && <p className="text-green-600">Book updated!</p>}
-          {error && <p className="text-red-600">Error: {error}</p>}
-        </form> */}
         <EditForm
           title={title}
           author={author}
