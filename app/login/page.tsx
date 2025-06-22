@@ -30,34 +30,93 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="max-w-md mx-auto mt-20 p-4 border rounded">
-      <h1 className="text-xl font-semibold mb-4">Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 border rounded mb-2"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 border rounded mb-2"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+    <main className="max-w-md mx-auto mt-24 p-8 bg-white shadow-lg rounded-lg">
+      <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
+        Sign in to your account
+      </h1>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Email address
+          </label>
+          <input
+            id="email"
+            type="email"
+            autoComplete="email"
+            placeholder="you@example.com"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={loading}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            autoComplete="current-password"
+            placeholder="••••••••"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={loading}
+          />
+        </div>
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded text-sm">
+            {error}
+          </div>
+        )}
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded"
+          className="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-semibold py-2 rounded shadow disabled:opacity-60"
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? (
+            <span>
+              <svg
+                className="inline mr-2 w-4 h-4 animate-spin"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="white"
+                  strokeWidth="4"
+                  fill="none"
+                />
+                <path
+                  className="opacity-75"
+                  fill="white"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                />
+              </svg>
+              Logging in...
+            </span>
+          ) : (
+            "Sign in"
+          )}
         </button>
-        {error && <p className="text-red-600 mt-2">{error}</p>}
       </form>
+      <div className="mt-6 text-center text-sm text-gray-600">
+        <span>Don&apos;t have an account? </span>
+        <a href="/signup" className="text-blue-600 hover:underline font-medium">
+          Sign up
+        </a>
+      </div>
     </main>
   );
 }
